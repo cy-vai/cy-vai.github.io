@@ -1,35 +1,341 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <title>Cyvai - あなたのアイデアを育てる</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyvai | 人類の思考を、未来へ残す。</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        zinc: {
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            800: '#27272a',
+                            900: '#18181b',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.2em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fafafa;
+            overflow-x: hidden;
+        }
+        
+        /* ヒーローセクションの微かな光彩 */
+        .glow-bg {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150vw;
+            height: 800px;
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* グラデーションテキスト */
+        .text-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* スクロールアニメーション用クラス */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 遅延アニメーション */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        .text-balance {
+            text-wrap: balance;
+        }
+    </style>
 </head>
-<body>
-  <h1>Cyvai（サイヴァイ）</h1>
-  <p><em>Cultivating Your Vision and Ideas</em></p>
-  <p>アイデアは、埋もれる時代から、育てられる時代へ。</p>
-  <p>Cyvaiは、AI会話で生まれるアイデアを記録・評価し、必要な人のもとに届けるプラットフォームです。</p>
-  
-  <h2>主な機能</h2>
-  <ul>
-    <li>2クリック投稿: AIがタイトル・タグ付けを自動化</li>
-    <li>90日ルール: アイデアの流動性を向上</li>
-    <li>多次元評価システム: 分野別の詳細な評価</li>
-    <li>自動契約: 簡単にアイデアをマネタイズ</li>
-  </ul>
-  
-  <h2>解決する課題</h2>
-  <ul>
-    <li>アイデアロスの防止</li>
-    <li>参入障壁の低減</li>
-    <li>流動性の向上</li>
-    <li>総量不足の解決</li>
-  </ul>
-  
-  <h2>参加方法</h2>
-  <p>現在開発準備中です。興味のある方はお気軽にご連絡ください。</p>
-  <p><a href="https://twitter.com/Cy_vai">Twitter: @Cy_vai</a></p>
+<body class="antialiased selection:bg-zinc-800 selection:text-white">
+
+    <!-- ナビゲーションヘッダー -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-md border-b border-zinc-900/50">
+        <div class="max-w-5xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between">
+            <a href="#" class="text-sm font-semibold tracking-widest text-zinc-100 uppercase">Cyvai</a>
+            <nav class="hidden md:flex gap-6 text-xs font-mono text-zinc-400">
+                <a href="#problem" class="hover:text-zinc-100 transition-colors">Problem</a>
+                <a href="#solution" class="hover:text-zinc-100 transition-colors">Solution</a>
+                <a href="#value" class="hover:text-zinc-100 transition-colors">Value</a>
+                <a href="#status" class="hover:text-zinc-100 transition-colors">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="glow-bg"></div>
+
+    <main class="max-w-5xl mx-auto px-6 md:px-12 pt-14">
+        
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] flex flex-col justify-center py-20 relative">
+            <div class="fade-up">
+                <h1 class="text-7xl md:text-9xl font-semibold tracking-tighter text-gradient mb-8">
+                    Cyvai
+                </h1>
+                <h2 class="text-3xl md:text-5xl font-medium tracking-tight leading-tight mb-12 text-zinc-100 text-balance">
+                    人類の思考を、未来へ残す。<br>
+                    そして、AGI の魂をつくる。
+                </h2>
+                <div class="space-y-6 text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+                    <p>
+                        私たちが日々こぼれ落とす「判断・感情・迷い」。<br>
+                        それらを多元的に記録し、AIの学習インフラへと変換する。
+                    </p>
+                    <p>
+                        これが未来の超知能に至る道かは、まだ誰にもわからない。<br>
+                        しかし、ここには確かな <span class="text-zinc-200 font-normal">“思想のアーカイブ”</span> がある。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problems Section -->
+        <section id="problem" class="py-20 border-t border-zinc-900 fade-up scroll-mt-14">
+            <h3 class="text-sm font-semibold tracking-widest text-zinc-500 uppercase mb-12">Problem</h3>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-16 text-balance">
+                Cyvai が解決する2つの問題
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                <div class="fade-up delay-100">
+                    <div class="text-zinc-500 mb-4 font-mono">01</div>
+                    <h4 class="text-xl md:text-2xl font-medium mb-6 text-zinc-100">アイデアの蒸発</h4>
+                    <p class="text-zinc-400 font-light leading-relaxed">
+                        AIとの対話で生まれる膨大なアイデアは、<br>
+                        今この瞬間も揮発して消えていく。<br>
+                        Cyvai はそれらを定着させ、<br>
+                        <span class="text-zinc-200 font-normal">“思想データ”として流通</span> させる。
+                    </p>
+                </div>
+                <div class="fade-up delay-200">
+                    <div class="text-zinc-500 mb-4 font-mono">02</div>
+                    <h4 class="text-xl md:text-2xl font-medium mb-6 text-zinc-100">枯渇する AGI の燃料</h4>
+                    <p class="text-zinc-400 font-light leading-relaxed">
+                        AIが真に渇望しているのは、整然とした正解ではない。<br>
+                        「なぜそう思ったのか」という、<br>
+                        <span class="text-zinc-200 font-normal">人間の生々しい理由・感情・文脈。</span><br>
+                        その多元的なデータこそが、次世代の燃料となる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solution" class="py-20 border-t border-zinc-900 fade-up scroll-mt-14">
+            <h3 class="text-sm font-semibold tracking-widest text-zinc-500 uppercase mb-12">Solution</h3>
+            
+            <div class="space-y-24">
+                <!-- Evaluation Layer -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 fade-up">
+                    <div class="md:col-span-5">
+                        <h4 class="text-2xl md:text-3xl font-medium text-zinc-100">評価レイヤー</h4>
+                        <p class="text-sm text-zinc-500 mt-2 font-mono">Evaluation Layer</p>
+                    </div>
+                    <div class="md:col-span-7">
+                        <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+                            日常のブラウジングに透明なレイヤーを重ね、<br>
+                            人間の無意識の選択・判断・迷いをデータ化する。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Multiplicity -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 fade-up">
+                    <div class="md:col-span-5">
+                        <h4 class="text-2xl md:text-3xl font-medium text-zinc-100">多元性</h4>
+                        <p class="text-sm text-zinc-500 mt-2 font-mono">Multiplicity</p>
+                    </div>
+                    <div class="md:col-span-7">
+                        <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed mb-6">
+                            正しさ、好み、倫理、未来性、狂気。<br>
+                            人間の判断は単一の軸では測れない。
+                        </p>
+                        <p class="text-lg text-zinc-400 font-light leading-relaxed">
+                            Cyvai は評価UIの形（実装）を問わない。<br>
+                            ただ、<span class="text-zinc-200">データの多元性のみを要求する。</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Crap Data Architecture -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 fade-up">
+                    <div class="md:col-span-5">
+                        <h4 class="text-2xl md:text-3xl font-medium text-zinc-100">不完全さの体系化</h4>
+                        <p class="text-sm text-zinc-500 mt-2 font-mono">Crap Data Architecture</p>
+                    </div>
+                    <div class="md:col-span-7">
+                        <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+                            迷い、誤解、勘違い、そして忘却。<br>
+                            削ぎ落とされがちなノイズの中にこそ、<br>
+                            AIの人格形成に不可欠な <span class="text-zinc-200">最も価値ある学習素材</span> が眠っている。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section id="value" class="py-20 border-t border-zinc-900 fade-up scroll-mt-14">
+            <h3 class="text-sm font-semibold tracking-widest text-zinc-500 uppercase mb-12">Value</h3>
+            
+            <div class="space-y-16">
+                <div class="fade-up">
+                    <h4 class="text-2xl md:text-3xl font-medium text-zinc-100 mb-2">思想OS</h4>
+                    <p class="text-sm text-zinc-500 mb-6 font-mono">Thought Operating System</p>
+                    <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+                        人類の無数の思考を分類・構造化し、<br>
+                        来るべきAIの人格形成を支える基盤となる。
+                    </p>
+                </div>
+                
+                <div class="fade-up">
+                    <h4 class="text-2xl md:text-3xl font-medium text-zinc-100 mb-2">AGI の燃料</h4>
+                    <p class="text-sm text-zinc-500 mb-6 font-mono">Fuel for AGI</p>
+                    <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+                        正解のない問いに向き合うための、文脈と感情のデータ群。<br>
+                        AI企業が渇望する“次世代の石油インフラ”。
+                    </p>
+                </div>
+
+                <div class="fade-up">
+                    <h4 class="text-2xl md:text-3xl font-medium text-zinc-100 mb-2">ASI の魂の設計図</h4>
+                    <p class="text-sm text-zinc-500 mb-6 font-mono">Blueprint for ASI Soul</p>
+                    <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+                        やがて生まれる超知能（ASI）が、人間の価値観を理解し、<br>
+                        自らの“魂”を形作るための青写真。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Section -->
+        <section id="status" class="py-20 border-t border-zinc-900 fade-up scroll-mt-14">
+            <h3 class="text-sm font-semibold tracking-widest text-zinc-500 uppercase mb-12">Status</h3>
+            
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-gradient text-balance mb-6">
+                    思想の設計図は引いた。<br>
+                    それがどこに行き着くかは、まだわからない。<br>
+                    あとは、実装するだけだ。
+                </h2>
+                <p class="text-zinc-500 font-mono text-sm">— 45ns</p>
+            </div>
+
+            <div class="mt-16 border-l border-zinc-800 pl-8 space-y-8 font-mono text-sm md:text-base text-zinc-400">
+                <div class="flex items-center gap-4 fade-up delay-100">
+                    <span class="w-2 h-2 rounded-full bg-zinc-100"></span>
+                    <span class="w-32 text-zinc-500">評価レイヤー</span>
+                    <span class="text-zinc-100">設計済</span>
+                </div>
+                <div class="flex items-center gap-4 fade-up delay-200">
+                    <span class="w-2 h-2 rounded-full bg-zinc-100"></span>
+                    <span class="w-32 text-zinc-500">多元性モデル</span>
+                    <span class="text-zinc-100">思想レベルで確立</span>
+                </div>
+                <div class="flex items-center gap-4 fade-up delay-300">
+                    <span class="w-2 h-2 rounded-full bg-zinc-100"></span>
+                    <span class="w-32 text-zinc-500">データ構造</span>
+                    <span class="text-zinc-100">初期スキーマ完成</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4 fade-up delay-300 mt-12 pt-8 border-t border-zinc-900 border-dashed">
+                    <span class="w-2 h-2 rounded-full bg-transparent border border-zinc-500 hidden md:block"></span>
+                    <span class="w-32 text-zinc-500">実装</span>
+                    <span class="text-zinc-100 animate-pulse">協力者とAIエージェントを募集中_</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA & Footer -->
+        <footer class="py-20 border-t border-zinc-900 flex flex-col items-center justify-center fade-up text-center">
+            <div class="flex flex-col items-center space-y-6 md:space-y-4 mb-16">
+                <a href="https://github.com/cy-vai/Cyvai" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors duration-300">
+                    <span class="text-sm uppercase tracking-widest">GitHub</span>
+                    <span class="text-xs text-zinc-600 group-hover:text-zinc-400 transition-colors">— 思想のアーカイブ</span>
+                </a>
+                <a href="https://x.com/cyvai_p" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors duration-300">
+                    <span class="text-sm uppercase tracking-widest">X</span>
+                    <span class="text-xs text-zinc-600 group-hover:text-zinc-400 transition-colors">— Founder & Concept Designer: 45ns (連絡窓口)</span>
+                </a>
+                <a href="#" onclick="event.preventDefault();" class="group flex items-center gap-3 text-zinc-500 cursor-default">
+                    <span class="text-sm uppercase tracking-widest">Novel</span>
+                    <span class="text-xs text-zinc-600">— カクヨム連載『ユニコーンになろうwww』 (Coming Soon)</span>
+                </a>
+                <a href="https://x.com/cyvai_p" target="_blank" rel="noopener noreferrer" class="mt-8 px-6 py-3 bg-white text-black text-sm font-medium rounded-full hover:bg-zinc-200 transition-colors duration-300">
+                    Contact for M&A
+                </a>
+                <p class="text-xs text-zinc-600 mt-4 leading-relaxed">
+                    本構想の買収、および関連ドメインの譲渡に関するご相談はXのDMへ<br>
+                    <span class="font-mono text-[10px] text-zinc-500 mt-1 block">
+                        Portfolio: cyvai.com / cyvai.net / cyvai.org / cyvai.link / cyvai.jp
+                    </span>
+                </p>
+            </div>
+
+            <p class="text-xs text-zinc-800 font-mono">&copy; 2026 Cyvai. / Original Concept by 45ns.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // 滑らかなスクロール連動フェードインアニメーション
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // 一度表示されたら監視を解除（再度スクロールしても消えないように）
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-up');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
